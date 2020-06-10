@@ -8,7 +8,7 @@ export default {
 	},
 	data() {
 		return {
-			selectedCity: 'Apple',
+			selectedCity: null,
 			cityOptions: cities,
 		};
 	},

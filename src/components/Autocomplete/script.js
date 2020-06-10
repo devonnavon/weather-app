@@ -1,12 +1,15 @@
 export default {
 	props: {
 		value: null,
-		options: [],
+		options: {
+			type: Array,
+			required: true,
+		},
 	},
 	computed: {
 		matches() {
-			return Object.entries(this.options).filter((option) => {
-				let optionText = option[0].toUpperCase();
+			return this.options.filter((option) => {
+				let optionText = option.name.toUpperCase();
 				return optionText.match(this.searchText.toUpperCase());
 			});
 		},
@@ -19,12 +22,15 @@ export default {
 			if (!this.open) {
 				this.open = true;
 			}
+			console.log(this.searchText);
 			this.highlightIndex = 0;
 		},
 		suggestionSelected(suggestion) {
 			this.open = false;
-			this.searchText = suggestion[0].name;
-			this.$emit('input', suggestion[1]);
+			console.log(suggestion);
+			console.log(suggestion.name);
+			this.searchText = suggestion.name;
+			this.$emit('input', suggestion);
 		},
 		mounted() {
 			this.updateComponentWithValue(this.value);
@@ -40,6 +46,7 @@ export default {
 		},
 
 		down() {
+			console.log(this.highlightIndex);
 			if (this.open) {
 				if (this.highlightIndex < this.matches.length - 1) {
 					this.highlightIndex++;
@@ -49,11 +56,11 @@ export default {
 			}
 		},
 	},
-	watch: {
-		value: function(newValue) {
-			this.updateComponentWithValue(newValue);
-		},
-	},
+	// watch: {
+	// 	value: function(newValue) {
+	// 		this.updateComponentWithValue(newValue);
+	// 	},
+	// },
 	data() {
 		return {
 			searchText: '',
