@@ -1,6 +1,7 @@
 // import {getWeather} from '@/scripts/openWeather';
 
 import { getWeather } from '../scripts/openWeather';
+// import keys from '@/../keys.json';
 
 export default {
 	name: 'WeatherDisplay',
@@ -10,16 +11,28 @@ export default {
 	methods: {
 		getWeatherData() {
 			if (this.cityId === null) {
-				console.log(getWeather);
 				return 'Please select a city';
 			} else {
-				return getWeather(this.cityId);
+				getWeather(this.cityId).then((response) => {
+					this.theData = response;
+				});
+				return this.theData;
 			}
 		},
 	},
+	watch: {
+		cityId: function() {
+			this.getWeatherData();
+		},
+	},
+	// computed: {
+	// 	weatherData() {
+	// 		return this.getWeatherData();
+	// 	},
+	// },
 	data() {
 		return {
-			weatherData: this.getWeatherData(),
+			theData: 'Please select a city',
 		};
 	},
 };

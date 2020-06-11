@@ -27,9 +27,10 @@ export default {
 		},
 		suggestionSelected(suggestion) {
 			this.open = false;
-
-			this.searchText = suggestion.name;
-			this.$emit('input', suggestion);
+			if (suggestion != null) {
+				this.searchText = suggestion.name;
+				this.$emit('input', suggestion);
+			}
 		},
 		mounted() {
 			this.updateComponentWithValue(this.value);
