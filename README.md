@@ -1,10 +1,5 @@
 ## Weather-App
 
-
-api-key: 974d91d260b1046d606b0ffdf0977196
-
-
-
 ## Vue preset instructions
 
 ```bash
@@ -13,5 +8,7 @@ npm run serve //Compiles and hot-reloads for development
 npm run build //Compiles and minifies for production
 npm run lint //Lints and fixes files
 ```
+
 ### Customize configuration
+
 See [Configuration Reference](https://cli.vuejs.org/config/).
