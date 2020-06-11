@@ -1,38 +1,48 @@
-// import {getWeather} from '@/scripts/openWeather';
-
 import { getWeather } from '../scripts/openWeather';
-// import keys from '@/../keys.json';
+import { ToggleButton } from 'vue-js-toggle-button';
 
 export default {
 	name: 'WeatherDisplay',
 	props: {
 		cityId: null,
 	},
+	components: {
+		'toggle-button': ToggleButton,
+	},
 	methods: {
-		getWeatherData() {
-			if (this.cityId === null) {
-				return 'Please select a city';
-			} else {
-				getWeather(this.cityId).then((response) => {
-					this.theData = response;
-				});
-				return this.theData;
-			}
+		loadWeatherData() {
+			this.weatherData = 'Loading...';
+			getWeather(this.cityId).then((response) => {
+				this.weatherData = response;
+			});
+		},
+		convertTemp(to) {
+			if (typeof this.weatherData === 'string') return '';
+			let temp = this.weatherData.main.temp;
+			if (to.toUpperCase() === 'F') return (temp - 273.15) * (9 / 5) + 32;
+			else if (to.toUpperCase() === 'C') return temp - 273.15;
+		},
+		toggleTemp(e) {
+			this.toggleFlag = e.value;
 		},
 	},
 	watch: {
 		cityId: function() {
-			this.getWeatherData();
+			this.loadWeatherData();
 		},
 	},
-	// computed: {
-	// 	weatherData() {
-	// 		return this.getWeatherData();
-	// 	},
-	// },
+	computed: {
+		celcius() {
+			return this.convertTemp('C');
+		},
+		fahrenheit() {
+			return this.convertTemp('F');
+		},
+	},
 	data() {
 		return {
-			theData: 'Please select a city',
+			weatherData: 'Please select a city',
+			toggleFlag: true,
 		};
 	},
 };
