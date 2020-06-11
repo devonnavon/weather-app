@@ -22,13 +22,12 @@ export default {
 			if (!this.open) {
 				this.open = true;
 			}
-			console.log(this.searchText);
+
 			this.highlightIndex = 0;
 		},
 		suggestionSelected(suggestion) {
 			this.open = false;
-			console.log(suggestion);
-			console.log(suggestion.name);
+
 			this.searchText = suggestion.name;
 			this.$emit('input', suggestion);
 		},
@@ -46,7 +45,6 @@ export default {
 		},
 
 		down() {
-			console.log(this.highlightIndex);
 			if (this.open) {
 				if (this.highlightIndex < this.matches.length - 1) {
 					this.highlightIndex++;
