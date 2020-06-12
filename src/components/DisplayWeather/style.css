@@ -1,0 +1,46 @@
+/* .display-weather {
+	display: flex;
+	flex-direction: row;
+	justify-items: flex-start;
+	flex-wrap: nowrap;
+	width: 600px;
+} */
+
+#displays {
+	display: flex;
+	flex-direction: row;
+	justify-items: flex-start;
+	flex-wrap: wrap;
+	width: 600px;
+}
+
+.temp {
+	height: 25px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-left: 5px;
+}
+
+#loading {
+	border: 16px solid #f3f3f3; /* Light grey */
+	border-top: 16px solid #3498db; /* Blue */
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	animation: spin 2s linear infinite;
+	align-self: center;
+}
+
+img {
+	align-items: flex-end;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
